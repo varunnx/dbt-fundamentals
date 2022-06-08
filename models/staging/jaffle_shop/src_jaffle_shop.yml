@@ -27,6 +27,7 @@ models:
   - name: stg_customers
     columns: 
       - name: customer_id
+        description: Primary key for customers
         tests:
           - unique
           - not_null
@@ -34,17 +35,18 @@ models:
   - name: stg_orders
     columns:
       - name: customer_id
+        description: Foreign key to stg_customers.customer_id.
         tests:
           - relationships:
               to: ref('stg_customers')
               field: customer_id
-        
       - name: order_id
+        description: Primary key for orders
         tests:
           - unique
           - not_null
-    
       - name: status
+        description: "{{ doc('order_status') }}"
         tests:
           - accepted_values:
               values:
