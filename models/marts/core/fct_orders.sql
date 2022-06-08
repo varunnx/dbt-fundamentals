@@ -12,7 +12,7 @@ payments as
          order_id,
          SUM(payment_amount) AS payment_amount
     from {{ ref('stg_payments') }}
-    where status = "success"
+    where payment_status = 'success'
     group by 1
 )
 
