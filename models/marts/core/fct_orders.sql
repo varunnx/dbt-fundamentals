@@ -10,8 +10,10 @@ payments as
 (
     select 
          order_id,
-         payment_amount
+         SUM(payment_amount) AS payment_amount
     from {{ ref('stg_payments') }}
+    where status = "success"
+    group by 1
 )
 
 select o.order_id as order_id,
