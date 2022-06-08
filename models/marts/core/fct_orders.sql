@@ -18,5 +18,5 @@ payments as
 
 select o.order_id as order_id,
     o.customer_id as customer_id,
-    p.payment_amount as amount
-from orders o inner join payments p on o.order_id = p.order_id
+    coalesce(p.payment_amount, 0) as amount
+from orders o left join payments p on o.order_id = p.order_id
